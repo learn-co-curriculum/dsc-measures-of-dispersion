@@ -18,7 +18,7 @@ To truly understand our data, we also need **Measures of Dispersion**, namely, A
 In this lesson, we'll learn about these measures of dispersion, and explore the relationship between them, as well as their relationship with other summary statistics.
 
 
-### Abolute Deviation
+### Absolute Deviation
 
 **Absolute deviation** is the simplest way of calculating the dispersion in a dataset. This is calculated by taking a value from the data and subtracting the mean score. This helps identify the distance between a given value and mean i.e. how much the value deviates from the mean -  
 
@@ -86,9 +86,9 @@ It is simply the square root of the variance. In the above formula, σ is the st
 One of the common applications of calculating standard deviation is statistical inference.  we are often presented with data from a sample only, we can estimate the population standard deviation from a sample standard deviation. These two standard deviations - sample and population standard deviations - are calculated slightly differently as we shall see ahead. 
 
 
-#### Quantiles. Percentiles and Quartiles
+#### Quantiles, Percentiles, and Quartiles
 
-**Quantiles** are points in a distribution that relate to the rank order of values in that distribution. We can find any quantile by sorting the sample. The middle value of the sorted sample (middle quantile, 50th percentile) is known as the **median**. The **limits** are the **minimum** and **maximum** values. Any other locations between these points can be described in terms of **percentiles**.
+**Quantiles** are points in a distribution that relate to the rank order of values in that distribution. We can find any quantile by sorting the sample. The middle value of the sorted sample (middle quantile, 50th percentile) is known as the **median**. The **limits** are the **minimum** and **maximum**  values. Any other locations between these points can be described in terms of **percentiles**.
 
 Percentiles are descriptions of quantiles relative to 100. So the 80th percentile is 80%  of the way up an ascending list of sorted values of data. 
 
@@ -96,7 +96,7 @@ Percentiles are descriptions of quantiles relative to 100. So the 80th percentil
 
 So above would mean that you are on 80th percentile and 80% of people in the data are shorter than you.  
 
-### InterQuantile Range - IQR
+### InterQuartile Range - IQR
 The **quartiles** of a data set divides the data into four equal parts, with one-fourth of the data values in each part. The second quartile position is the median of the data set, which divides the data set in half as shown for a simple dataset below:
 
 ![](https://mathbitsnotebook.com/Algebra1/StatisticsData/quartileboxview2.png)
@@ -127,7 +127,7 @@ Step 5: Subtract Q1 from Q3 to find the interquartile range.
 ```
 ---
 
-For caluclating IQR for even number of elements present in data , the process is slightly modified as below:
+For calculating IQR for even number of elements present in data , the process is slightly modified as below:
 ```
 Let's find the IQR for the following data set: 3, 5, 7, 8, 9, 11, 15, 16, 20, 21.
 
@@ -179,7 +179,7 @@ plt.show()
 ```
 
 
-![png](index_files/index_14_0.png)
+![png](output_14_0.png)
 
 
 In this simple box plot we can see that it is very simple to visually inspect the central tendency of the data with a median (drawn as blue line) at 57. The IQR to identify the 50% of the data (shown as a box). The **whiskers** (two horizontal lines) showing the minimum (54) and maximum (60) values in our dataset. 
@@ -196,10 +196,10 @@ plt.show()
 ```
 
 
-![png](index_files/index_16_0.png)
+![png](output_16_0.png)
 
 
-There it is , the white dot at the top. So you see how we can use boxplot along with other techniques for identifying the central and dispersion tendencies in a given dataset. We shall revisit this again in the course and will see how these techniques are used towards effective data analysis. 
+There it is--the white dot at the top. So you see how we can use box plot along with other techniques for identifying the central and dispersion tendencies in a given dataset. We shall revisit this again in the course and will see how these techniques are used towards effective data analysis. 
 
 ## Summary
 
