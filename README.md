@@ -3,13 +3,13 @@
 
 ## Objectives
 You will be able to:
-* Describe the significance of calculating measures of dispersion for continuous data
-* Understand the formula and intuition behind mean absolute deviation, standard deviation and variance
-* Understand the formula and intuition behind quantiles/quartiles and percentiles
-* Understand and interpret Interquartile distances with box plots
+- Describe the significance of calculating measures of dispersion for continuous data
+- Understand the formula and intuition behind mean absolute deviation, standard deviation and variance
+- Understand the formula and intuition behind quantiles/quartiles and percentiles
+- Understand and interpret Interquartile distances with box plots
 
 
-### Introduction
+## Introduction
 
 In previous lesson, we learned about Measures of central tendency - mean, median and mode. These metrics help give us a general understanding of where the values lie in the range of our data. However, they don't tell us the whole picture, and can often be misleading. 
 
@@ -18,11 +18,11 @@ To truly understand our data, we also need **Measures of Dispersion**, namely, A
 In this lesson, we'll learn about these measures of dispersion, and explore the relationship between them, as well as their relationship with other summary statistics.
 
 
-### Absolute Deviation
+## Absolute Deviation
 
 **Absolute deviation** is the simplest way of calculating the dispersion in a dataset. This is calculated by taking a value from the data and subtracting the mean score. This helps identify the distance between a given value and mean i.e. how much the value deviates from the mean -  
 
-> $|x_i - \bar{x}|$
+> $\left|x_i - \bar{x}\right|$
 
 Note: Bars are used for absolute values when we are not considering positive vs. negative deviation
 
@@ -30,9 +30,9 @@ For example, Consider the mean score for the group of 100 students is 58.75 out 
 
 **Average Absolute Deviation** of a dataset is calculated by taking mean of individual deviations of all data elements as shown in the formula below:
 
-![](mad.jpg)
+$$ \dfrac{1}{n}\sum^n_{i=1}\left|(x_i-\bar x)\right| $$
 
-Here **xi = [x1, x2, .., xn]** , where n is the number of observations. x-bar is the mean calculated over the dataset.
+Here **$x_i = [x_1, x_2, .., x_n]$** , where n is the number of observations. x-bar is the mean calculated over the dataset.
 
 So, for example, if two people make \$50k a year and two make \$60k a year, the mean is \$55k and the average absolute deviation is \$5k.  
 
@@ -40,7 +40,7 @@ So, for example, if two people make \$50k a year and two make \$60k a year, the 
 
 A more complex measure of dispersion is Variance. Unlike the absolute deviation, which uses the absolute value of the deviation in order to take care of the negative values, the variance achieves positive values by squaring each of the deviations instead. Adding up these squared deviations gives us the **sum of squares**, which we can then divide by the total number of values in our data.  Variance can be calculated with the formula:
 
-![](variance.jpg)
+$$ \sigma^2 = \dfrac{1}{n}\displaystyle\sum^n_{i=1}(x_i-\bar x)^2 $$
 
 Here the variance (σ2: sigma-squared), is achieved by: 
 * subtracting mean value (shown as mu) from each element in turn
@@ -74,19 +74,19 @@ There are, however, two potential problems with the variance. Firstly, because t
 
 Calculating the standard deviation rather than the variance rectifies this problem. 
 
-### Standard Deviation
+## Standard Deviation
 
 The standard deviation is another measure of the spread of values within a set of data. 
-It is simply the square root of the variance. In the above formula, σ is the standard deviation and σ2 is the variance. 
+It is simply the square root of the variance. In the above formula, $\sigma$ is the standard deviation and $\sigma^2$ is the variance. 
 
-![standard-deviation-formula](standard-deviation-formula.gif)
+$$ \sigma = \sqrt{\dfrac{1}{n}\displaystyle\sum^n_{i=1}(x_i-\mu)^2} $$
 
-**Note:** *μ (mu) is the true mean and x̅ is the arithmetic mean. For this purpose we can think of them as essentially the same. However, in mathematics terms, x̅ is our sample mean and μ is the true population mean.*
+**Note:** *$\mu$ (mu) is the true mean and $\bar x$ is the arithmetic mean. For this purpose we can think of them as essentially the same. However, in mathematics terms, $\bar x$ is our sample mean and $\mu$ is the true population mean.*
 
 One of the common applications of calculating standard deviation is statistical inference.  we are often presented with data from a sample only, we can estimate the population standard deviation from a sample standard deviation. These two standard deviations - sample and population standard deviations - are calculated slightly differently as we shall see ahead. 
 
 
-#### Quantiles, Percentiles, and Quartiles
+### Quantiles, Percentiles, and Quartiles
 
 **Quantiles** are points in a distribution that relate to the rank order of values in that distribution. We can find any quantile by sorting the sample. The middle value of the sorted sample (middle quantile, 50th percentile) is known as the **median**. The **limits** are the **minimum** and **maximum**  values. Any other locations between these points can be described in terms of **percentiles**.
 
@@ -96,14 +96,14 @@ Percentiles are descriptions of quantiles relative to 100. So the 80th percentil
 
 So above would mean that you are on 80th percentile and 80% of people in the data are shorter than you.  
 
-### InterQuartile Range - IQR
+## InterQuartile Range - IQR
 The **quartiles** of a data set divides the data into four equal parts, with one-fourth of the data values in each part. The second quartile position is the median of the data set, which divides the data set in half as shown for a simple dataset below:
 
 ![](https://mathbitsnotebook.com/Algebra1/StatisticsData/quartileboxview2.png)
 
 The **interquartile range (IQR)** is a measure of where the “middle fifty” is in a data set. Where a range is a measure of where the beginning and end are in a set, an interquartile range is a measure of where the bulk of the values lie. That’s why it’s preferred over many other measures of spread (i.e. the average or median) when reporting things like average retirement age and scores in a test etc. 
 
-#### Calculating IQR for a given data set. 
+### Calculating IQR for a given data set. 
 
 Let's look at the steps for calculating IQR for ODD number of elements. 
 ```
@@ -152,7 +152,7 @@ The above behavior of IQR is graphically depicted below:
 
 ![](IQR.png)
 
-### Visualizing Dispersion with Box Plots
+## Visualizing Dispersion with Box Plots
 
 Box plot is a visual representation of centrality and spread of data in following 5 terms (also known as 5-point statistics).
 
@@ -179,7 +179,7 @@ plt.show()
 ```
 
 
-![png](output_14_0.png)
+![png](index_files/index_14_0.png)
 
 
 In this simple box plot we can see that it is very simple to visually inspect the central tendency of the data with a median (drawn as blue line) at 57. The IQR to identify the 50% of the data (shown as a box). The **whiskers** (two horizontal lines) showing the minimum (54) and maximum (60) values in our dataset. 
@@ -196,7 +196,7 @@ plt.show()
 ```
 
 
-![png](output_16_0.png)
+![png](index_files/index_16_0.png)
 
 
 There it is--the white dot at the top. So you see how we can use box plot along with other techniques for identifying the central and dispersion tendencies in a given dataset. We shall revisit this again in the course and will see how these techniques are used towards effective data analysis. 
