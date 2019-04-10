@@ -33,7 +33,7 @@ $$\large \dfrac{1}{n}\sum^n_{i=1}\left|(x_i-\bar x)\right| $$
 
 Here **$x_i = [x_1, x_2, .., x_n]$** , where n is the number of observations. x-bar is the mean calculated over the dataset.
 
-So, for example, if two people make \$50k a year and two make \$60k a year, the mean is \$55k and the average absolute deviation is \$5k.  
+So, for example, if two people make 50,000 USD a year and two make 60,000 USD a year, the mean is 55,000 USD and the average absolute deviation is 5,000 USD.  
 
 ## Variance
 
