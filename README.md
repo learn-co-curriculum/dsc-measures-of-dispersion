@@ -39,14 +39,16 @@ So, for example, if two people make 50,000 USD a year and two make 60,000 USD a 
 
 A more complex measure of dispersion is Variance. Unlike the absolute deviation, which uses the absolute value of the deviation in order to take care of the negative values, the variance achieves positive values by squaring each of the deviations instead. Adding up these squared deviations gives us the **sum of squares**, which we can then divide by the total number of values in our data.  Variance can be calculated with the formula:
 
-$$ \large \sigma^2 = \dfrac{1}{n}\displaystyle\sum^n_{i=1}(x_i-\bar x)^2 $$
+$$ \large \sigma^2 = \dfrac{1}{n}\displaystyle\sum^n_{i=1}(x_i-\mu)^2 $$
 
-Here the variance (σ2: sigma-squared), is achieved by: 
+Here the variance ($\sigma^2$: sigma-squared), is achieved by: 
 * subtracting mean value (shown as mu) from each element in turn
 * squaring the result (to remove the negative sign) and adding to a total
 * dividing by total number of observations
 
-If we were to do that for our four people above, the variance would be:
+You'll notice a new term: $\mu$ (mu). $\mu$ (mu) is the true mean and $\bar x$ is the arithmetic mean. For this purpose, we can think of them as essentially the same. However, in mathematical terms, $\bar x$ is our sample mean and $\mu$ is the true population mean. The variance formula changes slightly when you are calculating a population and sample standard deviation mean.
+
+If we were to calculate the variance for our 4 people, it would look like:
 
 
 ```python
@@ -79,8 +81,6 @@ The standard deviation is another measure of the spread of values within a set o
 It is simply the square root of the variance. In the above formula, $\sigma$ is the standard deviation and $\sigma^2$ is the variance. 
 
 $$ \large \sigma = \sqrt{\dfrac{1}{n}\displaystyle\sum^n_{i=1}(x_i-\mu)^2} $$
-
-**Note:** *$\mu$ (mu) is the true mean and $\bar x$ is the arithmetic mean. For this purpose, we can think of them as essentially the same. However, in mathematical terms, $\bar x$ is our sample mean and $\mu$ is the true population mean.*
 
 One of the common applications of calculating standard deviation is statistical inference.  we are often presented with data from a sample only, we can estimate the population standard deviation from a sample standard deviation. These two standard deviations - sample and population standard deviations - are calculated slightly differently as we shall see ahead. 
 
