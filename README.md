@@ -98,7 +98,7 @@ So above would mean that you are on 80th percentile and 80% of people in the dat
 ## InterQuartile Range - IQR
 The **quartiles** of a data set divide the data into four equal parts, with one-fourth of the data values in each part. The second quartile position is the median of the data set, which divides the data set in half as shown for a simple dataset below:
 
-![](images/quartilebox.png)
+<img src="images/IQR_new.png" width="600">
 
 The **interquartile range (IQR)** is a measure of where the “middle fifty” is in a data set. Where a range is a measure of where the beginning and end are in a set, an interquartile range is a measure of where the bulk of the values lie. That’s why it’s preferred over many other measures of spread (i.e. the average or median) when reporting things like average retirement age and scores in a test etc. 
 
