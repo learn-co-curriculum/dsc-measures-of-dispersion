@@ -96,7 +96,7 @@ Percentiles are descriptions of quantiles relative to 100. So the 80th percentil
 In the image above, you are in the 80th percentile for height so 80% of people in the data set are shorter than you.  
 
 ## InterQuartile Range - IQR
-The **quartiles** of a data set divide the data into four equal parts, with one-fourth of the data values in each part. The second quartile position is the median of the data set, which divides the dataset in half as shown for a simple data set below:
+The **quartiles** of a data set divide the data into four equal parts, with one-fourth of the data values in each part. The second quartile position is the median of the data set, which divides the data set in half as shown for a simple data set below:
 
 <img src="images/IQR_new.png" width="600">
 
