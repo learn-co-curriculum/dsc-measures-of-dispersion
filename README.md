@@ -3,202 +3,211 @@
 
 ## Introduction
 
-In the previous lesson, we learned about Measures of Central Tendency - mean, median and mode. These metrics help give us a general understanding of where the values lie in the range of our data. However, they don't tell us the whole picture, and can often be misleading. 
+Previously, you learned about three Measures of Central Tendency: the mean, median and mode. These metrics can give you a general understanding of where data values lie within the range of the whole data set but they don't tell you whole story. In fact, they can often be misleading!
 
-To truly understand our data, we also need **Measures of Dispersion**, namely, Absolute Deviation, Standard Deviation and Variance. These measures tell us how tightly or loosely clustered around the center our data is, and generally act as a measure of how "noisy" our dataset is or isn't.
+To truly understand your data, you also need **Measures of Dispersion**, namely: absolute deviation, standard deviation, and variance. These measures tell you how tightly (or loosely) your data is clustered around its center. Generally, measures of dispersion report on how "noisy" your dataset is. 
 
-In this lesson, we'll learn about these measures of dispersion, and explore the relationship between them, as well as their relationship with other summary statistics.
+In this lesson, you'll learn about the different measures of dispersion and explore how they are related to each other as well as other summary statistics.
 
 ## Objectives
 You will be able to:
 - Describe the significance of calculating measures of dispersion for continuous data
-- Understand the formula and intuition behind mean absolute deviation, standard deviation, and variance
-- Understand the formula and intuition behind quantiles/quartiles and percentiles
-- Understand and interpret interquartile distances with box plots
+- Understand the formula and intuition behind absolute deviation, variance, and standard deviation
+- Understand quantiles, quartiles, percentiles, and interquartile range
+- Understand, interpret, and visualize interquartile distances with box plots
 
 
 ## Absolute Deviation
 
-**Absolute Deviation** is the simplest way of calculating the dispersion in a dataset. This is calculated by taking a value from the data and subtracting the mean. This helps to identify the distance between a given value and mean i.e. how much the value deviates from the mean:  
+**Absolute Deviation** is the simplest way of calculating the dispersion of a dataset. It is calculated by taking a value from the data set and subtracting the mean of the data set. This helps to identify the "distance" between a given value and the mean. In other words, how much a value *deviates* from the mean.  
 
 > $\left|x_i - \bar{x}\right|$
 
-Note: The symbol $\bar{x}$ (pronounced "x-bar") represents the mean. Vertical bars are used for absolute values when we are not considering positive vs. negative deviation
+Here $x_i$ denotes an element from $[x_1, x_2, .., x_n]$ , where n is the total number of data points in the data set. The symbol $\bar{x}$ (pronounced "x-bar") is a commonly used mathematical notation to represent the mean. The vertical bars are used to denote absolute value which means all absolute deviation values are positive. This is important because when measuring deviation, you just want to focus on how big the difference is, not its sign.
 
-For example, consider the mean test score for a group of 100 students is 58.75 out of 100. If we took a student that scored 60 out of 100, the deviation of that score from the mean is 60 - 58.75 = 1.25. 
+If that sounded a little confusing, consider this example: Say the mean test score for a group of 100 students is 58.75 out of 100. If a particular student scored 60 out of 100, the absolute deviation of that score from the mean is:
 
-**Average Absolute Deviation** of a dataset is calculated by taking the mean of the individual deviations of all data elements as shown in the formula below:
+> $ \left|60 - 58.75\right| = 1.25 $ 
+
+**Average Absolute Deviation** is calculated by taking the mean of all individual absolute deviations in a data set as shown in the formula below:
 
 $$\large \dfrac{1}{n}\sum^n_{i=1}\left|(x_i-\bar x)\right| $$
 
-Here **$x_i = [x_1, x_2, .., x_n]$** , where n is the number of observations.
+The advantage here is that the average absolute deviation yields one number to describe dispersion. To illustrate this consider this example: In a group of four people, two people earn 50K USD a year and two earn 60K USD a year. The mean of the data set is 55K USD. The absolute deviations are:
 
-So, for example, if two people make 50,000 USD a year and two make 60,000 USD a year, the mean is 55,000 USD and the average absolute deviation is 5,000 USD.  
+> $ \left|50 - 55\right| = 5 $   
+> $ \left|50 - 55\right| = 5 $   
+> $ \left|60 - 55\right| = 5 $     
+> $ \left|60 - 55\right| = 5 $     
+
+The average absolute deviation is:
+
+> $ \large \frac{5+5+5+5}{4} = 5 $
 
 ## Variance
 
-A more complex measure of dispersion is Variance. Unlike the absolute deviation, which uses the absolute value of the deviation in order to take care of the negative values, the variance achieves positive values by squaring each of the deviations instead. Adding up these squared deviations gives us the **sum of squares**, which we can then divide by the total number of values in our data.  Variance can be calculated with the formula:
+A more complex measure of dispersion is **Variance**. Remember, measures of dispersion emphasize the magnitude of differences from the mean, not their sign. Unlike the absolute deviation, which uses the absolute value of the deviation to take care of negative values, the variance achieves positive values by *squaring* each of the deviations. Similar to what you saw with the average absolute deviation, the next step in calculating variance is to add up the squared deviations (the **sum of squares**), then divide by the total number of values in your data set. 
+
+OK, that was a mouthful but you can break it down mathematically as follows:
 
 $$ \large \sigma^2 = \dfrac{1}{n}\displaystyle\sum^n_{i=1}(x_i-\mu)^2 $$
 
-Here the variance ($\sigma^2$: sigma-squared), is achieved by: 
-* subtracting mean value (shown as mu) from each element in turn
-* squaring the result (to remove the negative sign) and adding to a total
-* dividing by total number of observations
+You'll notice a new term: $\mu$ (mu). $\mu$ is the true mean and $\bar x$ is the arithmetic mean. For this purpose, we can think of them as essentially the same. However, in mathematical terms, $\bar x$ is our sample mean and $\mu$ is the mean of the population that the sample was taken from. The variance formula changes slightly depending on whether you are working with data from a sample or data from the entire population. Don't worry if this is confusing now, the details will be discussed further later. 
 
-You'll notice a new term: $\mu$ (mu). $\mu$ (mu) is the true mean and $\bar x$ is the arithmetic mean. For this purpose, we can think of them as essentially the same. However, in mathematical terms, $\bar x$ is our sample mean and $\mu$ is the true population mean. The variance formula changes slightly when you are calculating a population and sample standard deviation mean.
+Say you want to calculate the variance of our salary data above. The first step is to calculate all of the differences from the mean:
 
-If we were to calculate the variance for our 4 people, it would look like:
+> $ 50 - 55 = -5 $   
+> $ 50 - 55 = -5 $   
+> $ 60 - 55 = 5 $     
+> $ 60 - 55 = 5 $  
 
+*Note: no absolute values, the signs are kept*
 
-```python
-# I'm going to import a library so I don't have to write too much code
-import numpy as np
+Next, square the differences:
 
-# I'll throw the salaries into a list
-salaries = [50, 50, 60, 60]
+> $ (-5)^2 = 25 $   
+> $ (-5)^2 = 25 $   
+> $ 5^2 = 25 $     
+> $ 5^2 = 25 $
 
-# And ask numpy to tell me the variance using the var() method
-np.var(salaries)
-```
+Finally, add them up and divide by the total number:
 
+> $ \large \frac{25+25+25+25}{4} = 25 $
 
+As a measure of dispersion, the variance is very useful. If the values in the data set are spread out about their mean, the variance will be a large number. On the other hand, if the values are clustered closely around their mean, the variance will be a much smaller number. 
 
+There are, however, two potential problems with the variance. First, because the deviations of values from the mean are squared, this gives more weight to extreme values. Outliers, which differ substantially more from the mean than the rest of the data in a data set, will impact the variance. Secondly, the variance is not in the same *units* as the individual values in a data set. Variance is measured in the *units squared*. This means we cannot directly relate a variance value to the values in our data set. In this isn't clear, go back to the salary example above. The salaries are measured in USD but the variance is measured in *USD squared* which is not the same thing.
 
-    25.0
-
-
-
-As a measure of dispersion, the variance is very useful. If the values in the data are spread out, the variance will be a large number. On the other hand, if the values are spread closely around the mean, the variance will be a much smaller number. 
-
-There are, however, two potential problems with the variance. Firstly, because the deviations of values from the mean are 'squared', this gives more weight to extreme scores. Outliers in the data can also impact variance. Secondly, the variance is not in the same units as the values in our data set. Variance is measured in the units **squared**. This means we cannot directly relate a variance value to the values in our data set. 
-
-Calculating the standard deviation rather than the variance rectifies this problem. 
+Fortunately, calculating the standard deviation rather than the variance fixes this problem. 
 
 ## Standard Deviation
 
-The standard deviation is another measure of the spread of values within a set of data. 
-It is simply the square root of the variance. In the above formula, $\sigma$ is the standard deviation and $\sigma^2$ is the variance. 
+The **Standard Deviation** is another measure of the spread of values within a data set. 
+It is simply the square root of the variance. In the above formula, $\sigma^2$ is the variance so $\sigma$ is the standard deviation. 
 
 $$ \large \sigma = \sqrt{\dfrac{1}{n}\displaystyle\sum^n_{i=1}(x_i-\mu)^2} $$
 
-One of the common applications of calculating standard deviation is statistical inference. We are often presented with data from a sample only and therefore must estimate the population standard deviation from a sample standard deviation. These two standard deviations - sample and population standard deviations - are calculated slightly differently as we shall see ahead. 
+So for the salary example above, you can calculate:
 
+> $ \sigma = \sqrt{\sigma^2} = \sqrt{25} = 5 $
+
+Now, the units are in dollars again!
+
+One common application of calculating the standard deviation is in *statistical inference*. As a data scientist, you will often be presented with data from a sample of a population like discussed above. The task in statistical inference is to estimate the population standard deviation from the sample standard deviation. Don't worry about the details for now. You'll learn about statistical inference soon.
 
 ## Quantiles, Percentiles, and Quartiles
 
-**Quantiles** are points in a distribution that relate to the rank order of values in that distribution. We can find any quantile by sorting the sample. The middle value of the sorted sample (middle quantile, 50th percentile) is known as the **median**. The **limits** are the **minimum** and **maximum**  values. Any other locations between these points can be described in terms of **percentiles**.
+**Quantiles** are points in a distribution that relate to the *rank order* of values in that distribution. Rank ordering just means the data are sorted in ascending order. You can find any quantile by sorting the sample. The middle value of the sorted sample (middle quantile, 50th percentile) is known as the **median**. The **limits** are the **minimum** and **maximum** values. Any other locations between these points can be described in terms of **percentiles**.
 
-Percentiles are descriptions of quantiles relative to 100. So the 80th percentile is 80% of the way up an ascending list of sorted values of data. 
+Percentiles are descriptions of quantiles relative to 100. So the 80th percentile is 80% of the way up an ascending list of sorted values of data. For example, take a look at the image below. You are in the 80th percentile for height so 80% of people in the data set are shorter than you. 
 
 ![](images/percent.svg)
 
-In the image above, you are in the 80th percentile for height so 80% of people in the data set are shorter than you.  
 
 ## InterQuartile Range - IQR
-The **quartiles** of a data set divide the data into four equal parts, with one-fourth of the data values in each part. The second quartile position is the median of the data set, which divides the data set in half as shown for a simple data set below:
+The **quartiles** of a data set divide the data into **four** equal parts with one-fourth of the data values in each part. Since there are four equal parts, there are 3 quartile positions that divide them. These are denoted by Q1, Q2, and Q3. The second quartile position, Q2, is the median of the data set, which divides the data set in half. Q1 is the border between the first two groups and is known as the "lower quartile". Similarly, Q3 is the border between the last two groups and is known as the "upper quartile". The image below illustrates how this looks:
 
 <img src="images/IQR_new.png" width="600">
 
-The **interquartile range (IQR)** is a measure of where the “middle fifty” is in a data set. Where a range is a measure of where the beginning and end are in a set, an interquartile range is a measure of where the bulk of the values lie. That’s why it’s preferred over many other measures of spread (i.e. the average or median) when reporting things like average retirement age and scores in a test etc. 
+The **InterQuartile Range (IQR)** is a measure of where the “middle fifty” is in a data set which is given by $ Q3 - Q1 $. This is useful because it tells you where the bulk of the values lie. It turns out IQR is sometimes preferred over other measures of centrality (i.e. the average or median) when reporting things like retirement age or test scores.  
 
-### Calculating IQR for a given data set. 
+### Calculating IQR for a Given Data Set
 
-Let's look at the steps for calculating IQR for an odd number of elements. 
+Look at the steps for calculating IQR for an odd number of elements:
+
 ```
 Data = 1, 5, 2, 7, 6, 12, 15, 18, 9, 27, 19
-Step 1: Put the given numbers in order.
-1, 2, 5, 6, 7, 9, 12, 15, 18, 19, 27.
+
+Step 1: Put the numbers in order.
+1, 2, 5, 6, 7, 9, 12, 15, 18, 19, 27
 
 Step 2: Find the median.
-1, 2, 5, 6, 7, 9, 12, 15, 18, 19, 27.
+1, 2, 5, 6, 7, 9, 12, 15, 18, 19, 27
 
 Step 3: Place parentheses around the numbers above and below the median. 
 Not necessary statistically, but it makes Q1 and Q3 easier to spot.
-(1, 2, 5, 6, 7), 9, (12, 15, 18, 19, 27).
+(1, 2, 5, 6, 7), 9, (12, 15, 18, 19, 27)
 
 Step 4: Find Q1 and Q3
-Think of Q1 as a median in the lower half of the data and think of Q3 as a median for the upper half of the data.
-(1, 2, 5, 6, 7),  9, ( 12, 15, 18, 19, 27). Q1 = 5 and Q3 = 18.
+Q1 is the median of the lower half of the data and Q3 is the median of the upper half of the data.
+(1, 2, 5, 6, 7),  9, ( 12, 15, 18, 19, 27). Q1 = 5 and Q3 = 18
 
-Step 5: Subtract Q1 from Q3 to find the interquartile range.
-18 – 5 = 13.
+Step 5: Subtract Q1 from Q3 for IQR  
+18 – 5 = 13
 ```
+
 ---
 
 For calculating IQR for an even number of elements, the process is slightly modified as below:
+
 ```
-Let's find the IQR for the following data set: 3, 5, 7, 8, 9, 11, 15, 16, 20, 21.
+data = 3, 5, 7, 8, 9, 11, 15, 16, 20, 21
 
 Step 1: Put the numbers in order.
-3, 5, 7, 8, 9, 11, 15, 16, 20, 21.
+3, 5, 7, 8, 9, 11, 15, 16, 20, 21
 
-Step 2: Make a mark in the center of the data:
-3, 5, 7, 8, 9, | 11, 15, 16, 20, 21.
+Step 2: Put a mark where the median would be.
+3, 5, 7, 8, 9, | 11, 15, 16, 20, 21
 
-Step 3: Place parentheses around the numbers above and below the mark you made in Step 2–it makes Q1 and Q3 easier to spot. 
-(3, 5, 7, 8, 9), | (11, 15, 16, 20, 21).
+Step 3: Place parentheses around the numbers above and below the mark you made in Step 2.
+(3, 5, 7, 8, 9), | (11, 15, 16, 20, 21)
 
-Step 4: Find Q1 and Q3
-Q1 is the median (the middle) of the lower half of the data, and Q3 is the median (the middle) of the upper half of the data.
-(3, 5, 7, 8, 9), | (11, 15, 16, 20, 21). Q1 = 7 and Q3 = 16.
+Step 4: Find Q1 and Q3.
+Q1 is the median of the lower half of the data and Q3 is the median of the upper half of the data.
+(3, 5, 7, 8, 9), | (11, 15, 16, 20, 21). Q1 = 7 and Q3 = 16
 
 Step 5: Subtract Q1 from Q3 for IQR
 16 – 7 = 9
 ```
 
-The above behavior of IQR is graphically depicted below: 
+The above is graphically depicted below:
 
 ![](images/IQR.png)
 
 ## Visualizing Dispersion with Box Plots
 
-Box plot is a visual representation of centrality and spread of data in the following 5 terms (also known as 5-point statistics).
+As a data scientist, you will need to be able to present your analysis visually. Box plots are a commonly used visual representation of centrality and spread of data that is based on quartiles.
 
-* Minimum: the minimum number in the data set
-* Maximum: the maximum number in the data set
-* Median: If the data set is arranged in ascending order, what is the middle number?
-* First Quartile: If the data set is arranged in ascending order, then 25% of data is below it
-* Third Quartile: If the data set is arranged in ascending order, then 75% of data is below it
+A general depiction of a box plot is shown below:
+<img src="./images/boxplot.png" width="600">
 
-They enable us to study the distributional characteristics of a group of scores as well as the level of the scores. A general depiction of a box plot is shown below:
-![](images/simplebox.gif)
+When creating box plots, follow the procedure described above for determining IQR. First, sort the data. Next, divide the data into four equal-sized groups, that is, 25% of all values are placed in each group. Identify Q1, Q2, and Q3 based on the groups. An important feature of the box plot is the set of lines that radiate from the middle to the "minimum" and "maximum" values. These lines are commonly called "whiskers". You've probably noticed in the image above that the lines do not go to the true minimum and maximum values (confusing right?) but rather $ Q1 - 1.5*IQR $ and $ Q3 + 1.5*IQR $, respectively. Any values that fall outside this range are shown as individual data points. These values are considered outliers. Note: you might have read about some alternative definitions for how to draw the whiskers. Though these alternative definitions may be acceptable in some contexts, the definition presented here is what Python uses so it's best to stick with that.
 
-When creating box plots, scores are first sorted. Then four equal-sized groups are made from the ordered scores. That is, 25% of all scores are placed in each group. The lines dividing the groups are called quartiles, and the groups are referred to as quartile groups. Usually we label these groups 1 to 4 starting at the bottom. Matplotlib has a built-in function to create such box plots. Let's create a box plot for the retirement dataset we talked about earlier (including the outlier):
+Matplotlib can be used to generate box plots given a collection of values.
 
 
 ```python
 import matplotlib.pyplot as plt
+%matplotlib inline
+
 plt.style.use('ggplot') # for viewing a grid on plot
 x = [54, 54, 54, 55, 56, 57, 57, 58, 58, 60, 81]
-plt.boxplot(x,  showfliers=False)
-plt.title ("Retirement Age BoxPlot")
+plt.boxplot(x)
+plt.title ("Retirement Age Box Plot")
 plt.show()
 ```
 
 
-![png](index_files/index_5_0.png)
+![png](index_files/index_4_0.png)
 
 
-In this simple box plot we can see that it is very simple to visually inspect the central tendency of the data with a median (drawn as a blue line) at 57. The IQR identifies the middle 50% of the data (shown as a box). The **whiskers** (two horizontal lines) show the minimum (54) and maximum (60) values in our dataset. 
+In this box plot, you can see that it is very easy to visualize the central tendency of the data. The median is drawn as a blue line at 57. The IQR identifies the middle 50% of the data which is shown as the box. The whiskers (two horizontal lines) show the minimum (54) and maximum (60) values in our dataset that fall within $Q1-1.5IQR$ and $Q3+1.5IQR$, respectively. The point at 81 falls outside the range of the whiskers so it is shown as a data point and is considered an outlier.
 
-#### So what happened to the outlier?
-
-See that argument `showfliers=False`, it is used to eliminate the outliers from the plot, let's remove this and see if can see our outlier. 
+The outlier value squishes the visualization of the box. Sometimes, it is convenient to hide the outliers to get a better view of the box. You can pass the argument `showfliers=False` to hide the outliers:
 
 
 ```python
-plt.boxplot(x)
-plt.title ("Retirement Age BoxPlot - with outliers")
+plt.boxplot(x, showfliers=False)
+plt.title ("Retirement Age Box Plot - Without Outliers")
 plt.show()
 ```
 
 
-![png](index_files/index_7_0.png)
+![png](index_files/index_6_0.png)
 
 
-There it is--the white dot at the top. So you see how we can use a box plot along with other techniques for identifying the central and dispersion tendencies in a given dataset. We shall revisit this again in the course and will see how these techniques are used towards effective data analysis. 
+You will revisit these topics continuously throughout the course and will see how these concepts are used toward effective data analysis. 
 
 ## Summary
 
-Building up from the previous lesson in measures of central tendency, this lesson introduced some measures of identifying the spread or deviation present in the data. We also looked quartiles, IQR and how to use box plots to visually inspect the data distributions. We shall build upon these basic ideas as we take a deep dive into statistics later on. 
+In this lesson, you learned about some commonly used measures of dispersion. These measures identify the spread or deviation present in a data set. You also looked at quantiles, percentiles, quartiles, and IQR as well as how to use those concepts to construct box blots for visualizing the distribution of data in a given data set.
