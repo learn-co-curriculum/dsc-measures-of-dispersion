@@ -91,7 +91,7 @@ So for the salary example above, you can calculate:
 
 > $ \sigma = \sqrt{\sigma^2} = \sqrt{25} = 5 $
 
-Now, the units are in dollars again!
+Now, the units are in USD again!
 
 One common application of calculating the standard deviation is in *statistical inference*. As a data scientist, you will often be presented with data from a sample of a population like discussed above. The task in statistical inference is to estimate the population standard deviation from the sample standard deviation. Don't worry about the details for now. You'll learn about statistical inference soon.
 
@@ -109,60 +109,129 @@ The **quartiles** of a data set divide the data into **four** equal parts with o
 
 <img src="images/IQR_new.png" width="600">
 
-The **InterQuartile Range (IQR)** is a measure of where the “middle fifty” is in a data set which is given by $ Q3 - Q1 $. This is useful because it tells you where the bulk of the values lie. It turns out IQR is sometimes preferred over other measures of centrality (i.e. the average or median) when reporting things like retirement age or test scores.  
+The **InterQuartile Range (IQR)** is a measure of where the “middle fifty” is in a data set which is given by $ Q3 - Q1 $. This is useful because it tells you where the bulk of the values lie. To relate these concepts back to percentiles, Q1 is the 25th percentile and Q3 is the 75th percentile. The IQR is calculated by subtracting the 25th percentile from the 75th percentile. 
+
+In practice, there are actually several different methods for determining percentiles which are accepted and you may have encountered some of these methods before. For now, you can just focus on the method shown below which is what is used by default in the go-to statistical Python packages you will use throughout this course.
 
 ### Calculating IQR for a Given Data Set
 
-Look at the steps for calculating IQR for an odd number of elements:
+You will now get a feel for how IQR is calculated using a small list of numbers as an example.
 
-```
-Data = 1, 5, 2, 7, 6, 12, 15, 18, 9, 27, 19
 
-Step 1: Put the numbers in order.
-1, 2, 5, 6, 7, 9, 12, 15, 18, 19, 27
-
-Step 2: Find the median.
-1, 2, 5, 6, 7, 9, 12, 15, 18, 19, 27
-
-Step 3: Place parentheses around the numbers above and below the median. 
-Not necessary statistically, but it makes Q1 and Q3 easier to spot.
-(1, 2, 5, 6, 7), 9, (12, 15, 18, 19, 27)
-
-Step 4: Find Q1 and Q3
-Q1 is the median of the lower half of the data and Q3 is the median of the upper half of the data.
-(1, 2, 5, 6, 7),  9, ( 12, 15, 18, 19, 27). Q1 = 5 and Q3 = 18
-
-Step 5: Subtract Q1 from Q3 for IQR  
-18 – 5 = 13
+```python
+# List of numbers
+x = [1, 4, 18, 3, 4, 9, 12, 22, 31, 13]
 ```
 
----
+**Step 1:** Sort the data in ascending order
 
-For calculating IQR for an even number of elements, the process is slightly modified as below:
 
-```
-data = 3, 5, 7, 8, 9, 11, 15, 16, 20, 21
-
-Step 1: Put the numbers in order.
-3, 5, 7, 8, 9, 11, 15, 16, 20, 21
-
-Step 2: Put a mark where the median would be.
-3, 5, 7, 8, 9, | 11, 15, 16, 20, 21
-
-Step 3: Place parentheses around the numbers above and below the mark you made in Step 2.
-(3, 5, 7, 8, 9), | (11, 15, 16, 20, 21)
-
-Step 4: Find Q1 and Q3.
-Q1 is the median of the lower half of the data and Q3 is the median of the upper half of the data.
-(3, 5, 7, 8, 9), | (11, 15, 16, 20, 21). Q1 = 7 and Q3 = 16
-
-Step 5: Subtract Q1 from Q3 for IQR
-16 – 7 = 9
+```python
+# Sort in ascending order
+x = sorted(x)
 ```
 
-The above is graphically depicted below:
+**Step 2:** Calculate the distance between the last element and the first element
 
-![](images/IQR.png)
+
+```python
+# Distance between last and first element
+distance = len(x) - 1
+```
+
+**Step 3:** Multiply the distance by the desired percentiles, 25th and 75th. This will yield the indices of the elements that correspond to the 25th percentile and 75th percentile.
+
+
+```python
+# Multiply distance by percentiles
+
+# For 25th percentile
+p25 = 0.25*distance
+
+# For 75th percentile
+p75 = 0.75*distance
+```
+
+**Step 4:** Now here is the tricky part. Remember, a list is a collection of discrete elements but the concept of percentiles is usually applied to continuous data. To deal with this, Python uses *linear interpolation* to calculate percentiles. Look at p25 and p75: 
+
+
+```python
+p25
+```
+
+
+
+
+    2.25
+
+
+
+
+```python
+p75
+```
+
+
+
+
+    6.75
+
+
+
+Both p25 and p75 have a fractional components! These cannot be used as list indices. This is where linear interpolation comes in. To apply linear interpolation, first separate the fractional and non-fractional components of p25 and p75 into separate variables. The non-fractional component will be used as an index.
+
+
+```python
+# 25th percentile
+index_p25 = 2
+frac_p25 = 0.25
+
+# 75th percentile
+index_p75 = 6
+frac_p75 = 0.75
+```
+
+Now plug these values into the linear interpolation formula:
+
+> $ interpolation = x[index] + (x[index + 1] - x[index])*frac $
+
+
+```python
+interpolation_p25 = x[index_p25] + (x[index_p25+1] - x[index_p25])*frac_p25
+
+interpolation_p75 = x[index_p75] + (x[index_p75+1] - x[index_p75])*frac_p75
+```
+
+**Step 5:** Subtract the interpolated 25th percentile from the interpolated 75th percentile to get the IQR:
+
+
+```python
+iqr = interpolation_p75 - interpolation_p25
+iqr
+```
+
+
+
+
+    12.75
+
+
+
+In practice, you will use the statistical package, SciPy, to calculate IQR. SciPy will be introduced in detail later so don't sweat the details. Just take a look at the code below to convince yourself that the method above is what is actually used by Python.
+
+
+```python
+from scipy.stats import iqr
+
+iqr(x)
+```
+
+
+
+
+    12.75
+
+
 
 ## Visualizing Dispersion with Box Plots
 
@@ -171,7 +240,9 @@ As a data scientist, you will need to be able to present your analysis visually.
 A general depiction of a box plot is shown below:
 <img src="./images/boxplot.png" width="600">
 
-When creating box plots, follow the procedure described above for determining IQR. First, sort the data. Next, divide the data into four equal-sized groups, that is, 25% of all values are placed in each group. Identify Q1, Q2, and Q3 based on the groups. An important feature of the box plot is the set of lines that radiate from the middle to the "minimum" and "maximum" values. These lines are commonly called "whiskers". You've probably noticed in the image above that the lines do not go to the true minimum and maximum values (confusing right?) but rather $ Q1 - 1.5*IQR $ and $ Q3 + 1.5*IQR $, respectively. Any values that fall outside this range are shown as individual data points. These values are considered outliers. Note: you might have read about some alternative definitions for how to draw the whiskers. Though these alternative definitions may be acceptable in some contexts, the definition presented here is what Python uses so it's best to stick with that.
+An important feature of the box plot is the set of lines that radiate from the middle to the "minimum" and "maximum" values. These lines are commonly called **"whiskers"**. You've probably noticed in the image above that the lines do not go to the true minimum and maximum values (confusing right?) but rather $ Q1 - 1.5*IQR $ and $ Q3 + 1.5*IQR $, respectively. Any values that fall outside this range are shown as individual data points. These values are considered outliers. 
+
+ > Note: you might have read about some alternative definitions for how to draw the whiskers. Though these alternative definitions may be acceptable in some contexts, the definition presented here is what Python uses so it's best to stick with that.
 
 Matplotlib can be used to generate box plots given a collection of values.
 
@@ -188,7 +259,7 @@ plt.show()
 ```
 
 
-![png](index_files/index_4_0.png)
+![png](index_files/index_22_0.png)
 
 
 In this box plot, you can see that it is very easy to visualize the central tendency of the data. The median is drawn as a blue line at 57. The IQR identifies the middle 50% of the data which is shown as the box. The whiskers (two horizontal lines) show the minimum (54) and maximum (60) values in our dataset that fall within $Q1-1.5IQR$ and $Q3+1.5IQR$, respectively. The point at 81 falls outside the range of the whiskers so it is shown as a data point and is considered an outlier.
@@ -203,7 +274,7 @@ plt.show()
 ```
 
 
-![png](index_files/index_6_0.png)
+![png](index_files/index_24_0.png)
 
 
 You will revisit these topics continuously throughout the course and will see how these concepts are used toward effective data analysis. 
