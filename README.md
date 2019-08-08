@@ -178,7 +178,7 @@ p75
 
 
 
-Both p25 and p75 have a fractional components! These cannot be used as list indices. This is where linear interpolation comes in. To apply linear interpolation, first separate the fractional and non-fractional components of p25 and p75 into separate variables. The non-fractional component will be used as an index.
+Both p25 and p75 have a fractional component! These cannot be used as list indices. This is where linear interpolation comes in. To apply linear interpolation, first separate the fractional and non-fractional components of p25 and p75 into separate variables. The non-fractional component will be used as an index.
 
 
 ```python
