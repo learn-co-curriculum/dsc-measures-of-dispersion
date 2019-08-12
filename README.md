@@ -33,7 +33,7 @@ If that sounded a little confusing, consider this example: Say the mean test sco
 
 $$\large \dfrac{1}{n}\sum^n_{i=1}\left|(x_i-\bar x)\right| $$
 
-The advantage here is that the average absolute deviation yields one number to describe dispersion. To illustrate this consider this example: In a group of four people, two people earn 50K USD a year and two earn 60K USD a year. The mean of the data set is 55K USD. The absolute deviations are:
+The advantage here is that the average absolute deviation yields one number to describe dispersion. To illustrate this, consider this example: In a group of four people, two people earn 50K USD a year and two earn 60K USD a year. The mean of the data set is 55K USD. The absolute deviations are:
 
 > $ \left|50 - 55\right| = 5 $   
 > $ \left|50 - 55\right| = 5 $   
@@ -115,15 +115,15 @@ In practice, there are actually several different methods for determining percen
 
 ### Calculating IQR for a Given Data Set
 
-You will now get a feel for how IQR is calculated using a small list of numbers as an example.
+You will now get a feel for how IQR is calculated using the collection of numbers from the image above. First, put the numbers in a list.
 
 
 ```python
 # List of numbers
-x = [1, 4, 18, 3, 4, 9, 12, 22, 31, 13]
+x = [3, 5, 8, 12, 15, 18, 20, 22, 25, 30, 50, 80, 687]
 ```
 
-**Step 1:** Sort the data in ascending order
+**Step 1:** Sort the data in ascending order (these numbers are already sorted)
 
 
 ```python
@@ -145,93 +145,95 @@ distance = len(x) - 1
 ```python
 # Multiply distance by percentiles
 
-# For 25th percentile
-p25 = 0.25*distance
-
-# For 75th percentile
-p75 = 0.75*distance
+# Index of 25th percentile
+index_p25 = 0.25*distance
+index_p25
 ```
 
-**Step 4:** Now here is the tricky part. Remember, a list is a collection of discrete elements but the concept of percentiles is usually applied to continuous data. To deal with this, Python uses *linear interpolation* to calculate percentiles. Look at p25 and p75: 
+
+
+
+    3.0
+
+
 
 
 ```python
+# Index of 75th percentile
+index_p75 = 0.75*distance
+index_p75
+```
+
+
+
+
+    9.0
+
+
+
+**Step 4:** Using the indices calculated above, determine the 25th and 75th percentiles.
+
+
+```python
+# 25th Percentile
+p25 = x[int(index_p25)]
 p25
 ```
 
 
 
 
-    2.25
+    12
 
 
 
 
 ```python
+# 75th Percentile
+p75 = x[int(index_p75)]
 p75
 ```
 
 
 
 
-    6.75
+    30
 
 
 
-Both p25 and p75 have a fractional component! These cannot be used as list indices. This is where linear interpolation comes in. To apply linear interpolation, first separate the fractional and non-fractional components of p25 and p75 into separate variables. The non-fractional component will be used as an index.
-
-
-```python
-# 25th percentile
-index_p25 = 2
-frac_p25 = 0.25
-
-# 75th percentile
-index_p75 = 6
-frac_p75 = 0.75
-```
-
-Now plug these values into the linear interpolation formula:
-
-> $ interpolation = x[index] + (x[index + 1] - x[index])*frac $
+**Step 5:** Calculate the IQR by subtracting the 25th percentile from the 75th percentile.
 
 
 ```python
-interpolation_p25 = x[index_p25] + (x[index_p25+1] - x[index_p25])*frac_p25
-
-interpolation_p75 = x[index_p75] + (x[index_p75+1] - x[index_p75])*frac_p75
-```
-
-**Step 5:** Subtract the interpolated 25th percentile from the interpolated 75th percentile to get the IQR:
-
-
-```python
-iqr = interpolation_p75 - interpolation_p25
+# IQR
+iqr = p75 - p25
 iqr
 ```
 
 
 
 
-    12.75
+    18
 
 
 
-In practice, you will use the statistical package, SciPy, to calculate IQR. SciPy will be introduced in detail later so don't sweat the details. Just take a look at the code below to convince yourself that the method above is what is actually used by Python.
+In practice, you will probably never calculate the IQR by hand since Python libraries like NumPy have built in methods for calculating percentiles.  
 
 
 ```python
-from scipy.stats import iqr
+import numpy as np
 
-iqr(x)
+np.percentile(x, 75) - np.percentile(x, 25)
 ```
 
 
 
 
-    12.75
+    18.0
 
 
+
+You might have noticed that the indices calculated above happened to be whole numbers. Whole numbers are great to work with here since they can be used as indices directly. The calculation becomes a little more complicated when the indices are fractional numbers. In this case, NumPy will use a technique called "linear interpolation" to take the fractional components into account. This is beyond the scope of what you need to know but if you are curious you can check out the [documentation]("https://docs.scipy.org/doc/numpy/reference/generated/numpy.percentile.html"). 
 
 ## Visualizing Dispersion with Box Plots
 
@@ -258,10 +260,6 @@ plt.title ("Retirement Age Box Plot")
 plt.show()
 ```
 
-
-![png](index_files/index_22_0.png)
-
-
 In this box plot, you can see that it is very easy to visualize the central tendency of the data. The median is drawn as a blue line at 57. The IQR identifies the middle 50% of the data which is shown as the box. The whiskers (two horizontal lines) show the minimum (54) and maximum (60) values in our dataset that fall within $Q1-1.5IQR$ and $Q3+1.5IQR$, respectively. The point at 81 falls outside the range of the whiskers so it is shown as a data point and is considered an outlier.
 
 The outlier value squishes the visualization of the box. Sometimes, it is convenient to hide the outliers to get a better view of the box. You can pass the argument `showfliers=False` to hide the outliers:
@@ -272,10 +270,6 @@ plt.boxplot(x, showfliers=False)
 plt.title ("Retirement Age Box Plot - Without Outliers")
 plt.show()
 ```
-
-
-![png](index_files/index_24_0.png)
-
 
 You will revisit these topics continuously throughout the course and will see how these concepts are used toward effective data analysis. 
 
