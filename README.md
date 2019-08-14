@@ -99,7 +99,7 @@ Now, the units are in USD again!
 
 Percentiles are descriptions of quantiles relative to 100. So the 80th percentile is 80% of the way up an ascending list of sorted values of data. For example, take a look at the image below: 80% of people in the data set are shorter than you so you are in the 80th percentile for height. 
 
-![](images/percent.svg)
+<img src="./images/new_percent.png" width="600">
 
 
 ## InterQuartile Range - IQR
