@@ -19,7 +19,7 @@ You will be able to:
 
 ## Absolute Deviation
 
-**Absolute Deviation** is the simplest way of calculating the dispersion of a dataset. It is calculated by taking a value from the data set and subtracting the mean of the data set. This helps to identify the "distance" between a given value and the mean. In other words, how much a value *deviates* from the mean.  
+**Absolute Deviation** is the simplest way of calculating the dispersion of a data set. It is calculated by taking a value from the data set and subtracting the mean of the data set. This helps to identify the "distance" between a given value and the mean. In other words, how much a value *deviates* from the mean.  
 
 > $\left|x_i - \bar{x}\right|$
 
