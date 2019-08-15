@@ -19,7 +19,7 @@ You will be able to:
 
 ## Absolute Deviation
 
-**Absolute Deviation** is the simplest way of calculating the dispersion of a dataset. It is calculated by taking a value from the data set and subtracting the mean of the data set. This helps to identify the "distance" between a given value and the mean. In other words, how much a value *deviates* from the mean.  
+**Absolute Deviation** is the simplest way of calculating the dispersion of a data set. It is calculated by taking a value from the data set and subtracting the mean of the data set. This helps to identify the "distance" between a given value and the mean. In other words, how much a value *deviates* from the mean.  
 
 > $\left|x_i - \bar{x}\right|$
 
@@ -115,17 +115,121 @@ In practice, there are actually several different methods for determining percen
 
 You will now get a feel for how IQR is calculated using the collection of numbers from the image above. First, put the numbers in a list.
 
+
+```python
+# List of numbers
+x = [3, 5, 8, 12, 15, 18, 20, 22, 25, 30, 50, 80, 687]
+```
+
 **Step 1:** Sort the data in ascending order (these numbers are already sorted but don't skip this step when you do this on other data, it's important!).
+
+
+```python
+# Sort in ascending order
+x = sorted(x)
+```
 
 **Step 2:** Calculate the distance between the last element and the first element.
 
+
+```python
+# Distance between last and first element
+distance = len(x) - 1
+```
+
 **Step 3:** Multiply the distance by the desired percentiles, 25th and 75th, expressed as fractions. This will yield the indices of the elements that correspond to the 25th percentile and 75th percentile, respectively.
+
+
+```python
+# Multiply distance by percentiles
+
+# Index of 25th percentile
+index_p25 = 0.25*distance
+index_p25
+```
+
+
+
+
+    3.0
+
+
+
+
+```python
+# Index of 75th percentile
+index_p75 = 0.75*distance
+index_p75
+```
+
+
+
+
+    9.0
+
+
 
 **Step 4:** Using the indices calculated above, determine the 25th and 75th percentiles.
 
+
+```python
+# 25th Percentile
+p25 = x[int(index_p25)]
+p25
+```
+
+
+
+
+    12
+
+
+
+
+```python
+# 75th Percentile
+p75 = x[int(index_p75)]
+p75
+```
+
+
+
+
+    30
+
+
+
 **Step 5:** Calculate the IQR by subtracting the 25th percentile from the 75th percentile.
 
+
+```python
+# IQR
+iqr = p75 - p25
+iqr
+```
+
+
+
+
+    18
+
+
+
 In practice, you will probably never calculate the IQR by hand since numpy has a built-in method for calculating percentiles.  
+
+
+```python
+import numpy as np
+
+np.percentile(x, 75) - np.percentile(x, 25)
+```
+
+
+
+
+    18.0
+
+
 
 You might have noticed that the indices calculated above happened to be whole numbers. Whole numbers are great to work with here since they can be used as indices directly. The calculation becomes a little more complicated when the indices are fractional numbers. In this case, numpy will use a technique called "linear interpolation" to take the fractional components into account. This is beyond the scope of what you need to know but if you are curious about how it works you can check out the [documentation]("https://docs.scipy.org/doc/numpy/reference/generated/numpy.percentile.html"). 
 
@@ -143,9 +247,36 @@ An important feature of the box plot is the set of lines that radiate from the m
 
 Matplotlib can be used to generate box plots given a collection of values. Consider the retirement age data again:
 
+
+```python
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+plt.style.use('ggplot') # for viewing a grid on plot
+x = [54, 54, 54, 55, 56, 57, 57, 58, 58, 60, 81]
+plt.boxplot(x)
+plt.title ("Retirement Age Box Plot")
+plt.show()
+```
+
+
+![png](index_files/index_20_0.png)
+
+
 In this box plot, you can see that it is very easy to visualize the central tendency of the data. The median is drawn as a blue line at 57. The IQR identifies the middle 50% of the data which is shown as the box. The whiskers (two horizontal lines) show the minimum (54) and maximum (60) values in our dataset that fall within $Q1-1.5*IQR$ and $Q3+1.5*IQR$, respectively. The point at 81 falls outside the range of the whiskers so it is shown as a data point and is considered an outlier.
 
 The outlier data point squishes the visualization of the box. Sometimes, it is convenient to hide the outliers to get a better view of the box. You can pass the argument `showfliers=False` to hide the outliers:
+
+
+```python
+plt.boxplot(x, showfliers=False)
+plt.title ("Retirement Age Box Plot - Without Outliers")
+plt.show()
+```
+
+
+![png](index_files/index_22_0.png)
+
 
 Use the ```showfliers``` option with caution. You don't want to ignore data! 
 
