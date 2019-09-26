@@ -8,7 +8,7 @@ Previously, you learned about three measures of central tendency: the mean, medi
 To truly understand your data, you also need **Measures of Dispersion**, namely: absolute deviation, standard deviation, and variance. These measures tell you how tightly (or loosely) your data is clustered around its center. Generally, measures of dispersion report on how "noisy" your dataset is. 
 
 In this lesson, you'll learn about the different measures of dispersion and explore how they are related to each other as well as other summary statistics.
-
+ 
 ## Objectives
 You will be able to:
 * Describe the significance of calculating measures of dispersion for data
@@ -109,7 +109,7 @@ The **quartiles** of a dataset divide the data into **four** equal parts. Since 
 
 The **InterQuartile Range (IQR)** is a measure of where the “middle fifty” is in a dataset which is given by $ Q3 - Q1 $. This is useful because it tells you where the bulk of the values lie. To relate these concepts back to percentiles, Q1 is the 25th percentile and Q3 is the 75th percentile. The IQR is calculated by subtracting the 25th percentile from the 75th percentile. 
 
-In practice, there are actually several different methods for determining percentiles which are accepted and you may have encountered some of these methods before. For now, you can just focus on the method shown below which is what is used by default in the go-to statistical and mathematical Python packages, you will use throughout this course and your career, like `numpy`.
+In practice, there are actually several different methods for determining percentiles which are accepted and you may have encountered some of these methods before. For now, you can just focus on the method shown below which is what is used by default in the go-to statistical and mathematical Python packages that you will use throughout this course and your career like `numpy`.
 
 ### Calculating IQR for a Given Data Set
 
@@ -121,7 +121,7 @@ You will now get a feel for how IQR is calculated using the collection of number
 x = [3, 5, 8, 12, 15, 18, 20, 22, 25, 30, 50, 80, 687]
 ```
 
-**Step 1:** Sort the data in ascending order (these numbers are already sorted but don't skip this step when you do this on other data, it's important!).
+**Step 1:** Sort the data in ascending order (these numbers are already sorted but don't skip this step when you do this on other data- it's important!).
 
 
 ```python
@@ -241,7 +241,7 @@ A general depiction of a box plot is shown below:
 
 <img src="./images/new_boxplot.png" width="600">
 
-An important feature of the box plot is the set of lines that radiate from the middle to the "minimum" and "maximum" values. These lines are commonly called **"whiskers"**. You've probably noticed in the image above that the lines do not go to the true minimum and maximum values (confusing right?) but rather $ Q1 - 1.5*IQR $ and $ Q3 + 1.5*IQR $, respectively. Any values that fall outside this range are shown as individual data points. These values are considered outliers. 
+An important feature of the box plot is the set of lines that radiate from the middle to the "minimum" and "maximum" values. These lines are commonly called **"whiskers."** You've probably noticed in the image above that the lines do not go to the true minimum and maximum values (confusing right?) but rather $ Q1 - 1.5*IQR $ and $ Q3 + 1.5*IQR $, respectively. Any values that fall outside this range are shown as individual data points. These values are considered outliers. 
 
 > Note: You might have read about some alternative definitions for how to draw the whiskers. Though these alternative definitions may be acceptable in some contexts, the definition presented here is what Python uses so it's best to stick with that.
 
