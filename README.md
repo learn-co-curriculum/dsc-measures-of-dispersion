@@ -11,10 +11,9 @@ In this lesson, you'll learn about the different measures of dispersion and expl
  
 ## Objectives
 You will be able to:
-* Describe the significance of calculating measures of dispersion for data
-* Understand the formula and intuition behind absolute deviation, variance, and standard deviation
-* Understand quantiles, quartiles, percentiles, and interquartile range
-* Understand, interpret, and visualize interquartile distances with box plots
+
+* Compare the different measures of dispersion
+* Create a box plot and use it to interpret the spread of data
 
 
 ## Absolute Deviation
