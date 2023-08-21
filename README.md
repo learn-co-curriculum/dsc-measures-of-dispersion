@@ -1,4 +1,3 @@
-
 # Measures of Dispersion
 
 ## Introduction
@@ -98,13 +97,13 @@ Now, the units are in USD again!
 
 Percentiles are descriptions of quantiles relative to 100. So the 80th percentile is 80% of the way up an ascending list of sorted values of data. For example, take a look at the image below: 80% of people in the data set are shorter than you so you are in the 80th percentile for height. 
 
-<img src="./images/new_percent.png" width="600">
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/new_percent.png" width="600">
 
 
 ## InterQuartile Range - IQR
 The **quartiles** of a dataset divide the data into **four** equal parts. Since there are four equal parts, there are 3 quartile positions that divide them. These are denoted by Q1, Q2, and Q3. The second quartile position, Q2, is the median of the dataset, which divides the dataset in half. Q1 divides the lower half and is known as the "lower quartile". Similarly, Q3 divides the upper half and is known as the "upper quartile". The image below illustrates how this looks:
 
-<img src="images/new_measuresofdispersion2.png" width="600">
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/new_measuresofdispersion2.png" width="600">
 
 The **InterQuartile Range (IQR)** is a measure of where the “middle fifty” is in a dataset which is given by $ Q3 - Q1 $. This is useful because it tells you where the bulk of the values lie. To relate these concepts back to percentiles, Q1 is the 25th percentile and Q3 is the 75th percentile. The IQR is calculated by subtracting the 25th percentile from the 75th percentile. 
 
@@ -238,7 +237,7 @@ As a Data Scientist, you will need to be able to present your analysis visually.
 
 A general depiction of a box plot is shown below:
 
-<img src="./images/new_boxplot.png" width="600">
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/new_boxplot.png" width="600">
 
 An important feature of the box plot is the set of lines that radiate from the middle to the "minimum" and "maximum" values. These lines are commonly called **"whiskers."** You've probably noticed in the image above that the lines do not go to the true minimum and maximum values (confusing right?) but rather $ Q1 - 1.5*IQR $ and $ Q3 + 1.5*IQR $, respectively. Any values that fall outside this range are shown as individual data points. These values are considered outliers. 
 
@@ -259,7 +258,9 @@ plt.show()
 ```
 
 
+    
 ![png](index_files/index_20_0.png)
+    
 
 
 In this box plot, you can see that it is very easy to visualize the central tendency of the data. The median is drawn as a blue line at 57. The IQR identifies the middle 50% of the data which is shown as the box. The whiskers (two horizontal lines) show the minimum (54) and maximum (60) values in our dataset that fall within $Q1-1.5*IQR$ and $Q3+1.5*IQR$, respectively. The point at 81 falls outside the range of the whiskers so it is shown as a data point and is considered an outlier.
@@ -274,7 +275,9 @@ plt.show()
 ```
 
 
+    
 ![png](index_files/index_22_0.png)
+    
 
 
 Use the ```showfliers``` option with caution. You don't want to ignore data! 
